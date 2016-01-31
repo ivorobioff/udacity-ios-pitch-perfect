@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		2FBA70B21C5D5D75007342AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBA70B11C5D5D75007342AB /* AppDelegate.swift */; };
-		2FBA70B41C5D5D75007342AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBA70B31C5D5D75007342AB /* ViewController.swift */; };
+		2FBA70B41C5D5D75007342AB /* RecordVoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBA70B31C5D5D75007342AB /* RecordVoiceViewController.swift */; };
 		2FBA70B71C5D5D75007342AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FBA70B51C5D5D75007342AB /* Main.storyboard */; };
 		2FBA70B91C5D5D75007342AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FBA70B81C5D5D75007342AB /* Assets.xcassets */; };
 		2FBA70BC1C5D5D75007342AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FBA70BA1C5D5D75007342AB /* LaunchScreen.storyboard */; };
+		2FFD85151C5E055B0073FFD7 /* ChangeVoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFD85141C5E055A0073FFD7 /* ChangeVoicesViewController.swift */; };
+		2FFD85191C5E880F0073FFD7 /* RecordedAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFD85181C5E880F0073FFD7 /* RecordedAudio.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2FBA70AE1C5D5D75007342AB /* Pitch Perfect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pitch Perfect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBA70B11C5D5D75007342AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2FBA70B31C5D5D75007342AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2FBA70B31C5D5D75007342AB /* RecordVoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVoiceViewController.swift; sourceTree = "<group>"; };
 		2FBA70B61C5D5D75007342AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FBA70B81C5D5D75007342AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2FBA70BB1C5D5D75007342AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2FBA70BD1C5D5D75007342AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FFD85141C5E055A0073FFD7 /* ChangeVoicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeVoicesViewController.swift; sourceTree = "<group>"; };
+		2FFD85181C5E880F0073FFD7 /* RecordedAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordedAudio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +59,13 @@
 			isa = PBXGroup;
 			children = (
 				2FBA70B11C5D5D75007342AB /* AppDelegate.swift */,
-				2FBA70B31C5D5D75007342AB /* ViewController.swift */,
+				2FBA70B31C5D5D75007342AB /* RecordVoiceViewController.swift */,
 				2FBA70B51C5D5D75007342AB /* Main.storyboard */,
 				2FBA70B81C5D5D75007342AB /* Assets.xcassets */,
 				2FBA70BA1C5D5D75007342AB /* LaunchScreen.storyboard */,
 				2FBA70BD1C5D5D75007342AB /* Info.plist */,
+				2FFD85141C5E055A0073FFD7 /* ChangeVoicesViewController.swift */,
+				2FFD85181C5E880F0073FFD7 /* RecordedAudio.swift */,
 			);
 			path = "Pitch Perfect";
 			sourceTree = "<group>";
@@ -136,7 +142,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FBA70B41C5D5D75007342AB /* ViewController.swift in Sources */,
+				2FFD85191C5E880F0073FFD7 /* RecordedAudio.swift in Sources */,
+				2FFD85151C5E055B0073FFD7 /* ChangeVoicesViewController.swift in Sources */,
+				2FBA70B41C5D5D75007342AB /* RecordVoiceViewController.swift in Sources */,
 				2FBA70B21C5D5D75007342AB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +293,7 @@
 				2FBA70C21C5D5D75007342AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
