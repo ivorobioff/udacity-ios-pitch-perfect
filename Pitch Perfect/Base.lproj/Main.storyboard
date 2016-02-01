@@ -111,6 +111,13 @@
                                     <action selector="stopPlaying:" destination="af8-5R-Ahn" eventType="touchUpInside" id="yFK-mh-9K2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yy-SN-h0t">
+                                <rect key="frame" x="30" y="209" width="100" height="100"/>
+                                <state key="normal" image="Funny"/>
+                                <connections>
+                                    <action selector="funnyVoice:" destination="af8-5R-Ahn" eventType="touchUpInside" id="CLq-5r-hzi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -119,7 +126,9 @@
                             <constraint firstItem="Nmy-st-601" firstAttribute="top" secondItem="RgM-Be-QH7" secondAttribute="bottom" constant="80" id="NgC-7H-T18"/>
                             <constraint firstItem="udt-g7-inx" firstAttribute="leading" secondItem="25l-G4-ITb" secondAttribute="leadingMargin" constant="10" id="WCt-QS-XJA"/>
                             <constraint firstItem="s0v-Zq-cOB" firstAttribute="baseline" secondItem="udt-g7-inx" secondAttribute="baseline" id="WZu-FI-usl"/>
+                            <constraint firstItem="3Yy-SN-h0t" firstAttribute="top" secondItem="udt-g7-inx" secondAttribute="bottom" constant="30" id="X4j-tv-ss9"/>
                             <constraint firstItem="udt-g7-inx" firstAttribute="top" secondItem="Uco-Hl-unq" secondAttribute="bottom" constant="15" id="x8G-aI-ZDv"/>
+                            <constraint firstItem="3Yy-SN-h0t" firstAttribute="leading" secondItem="25l-G4-ITb" secondAttribute="leadingMargin" constant="10" id="ynJ-Pd-jBM"/>
                         </constraints>
                     </view>
                     <connections>
@@ -133,6 +142,7 @@
     </scenes>
     <resources>
         <image name="Fast" width="100" height="100"/>
+        <image name="Funny" width="100" height="100"/>
         <image name="Microphone" width="100" height="100"/>
         <image name="Slow" width="100" height="100"/>
         <image name="Stop" width="50" height="50"/>

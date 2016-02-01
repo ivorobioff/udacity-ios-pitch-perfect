@@ -38,6 +38,7 @@ class RecordVoiceViewController: UIViewController, AVAudioRecorderDelegate {
         
         let session = AVAudioSession.sharedInstance()
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        try! session.setActive(true)
 
         
         try! recorder = AVAudioRecorder(URL: recordPath, settings: [:])
@@ -47,6 +48,11 @@ class RecordVoiceViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+        
+        guard flag else {
+            print("Unable to store the recording.")
+            return
+        }
         
         let model = RecordedAudio(title: recorder.url.lastPathComponent!, url: recorder.url)
         
