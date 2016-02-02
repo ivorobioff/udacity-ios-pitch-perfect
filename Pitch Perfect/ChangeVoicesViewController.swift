@@ -17,6 +17,7 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     
     private var audioEngine: AVAudioEngine?
     private var audioPlayer: AVAudioPlayerNode?
+    private var voiceActivator: UIButton?
     
     private lazy var audioSession: AVAudioSession = {
         let session = AVAudioSession.sharedInstance()
@@ -43,6 +44,10 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         stopPlayingVoice()
@@ -53,30 +58,41 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func fastVoice(sender: UIButton) {
+        replaceVoiceActivator(with: sender)
         playVoice(withRate: 2.0)
     }
     
     @IBAction func funnyVoice(sender: UIButton) {
+        replaceVoiceActivator(with: sender)
         playVoice(withPitch: 1000)
     }
     
     @IBAction func slowVoice(sender: UIButton) {
+        replaceVoiceActivator(with: sender)
         playVoice(withRate: 0.5)
     }
     
     @IBAction func scaryVoice(sender: UIButton){
+        replaceVoiceActivator(with: sender)
         playVoice(withPitch: -1000)
     }
     
-    
     @IBAction func reverbVoice(sender: UIButton) {
+        replaceVoiceActivator(with: sender)
         playVoiceWithReverb()
+    }
+    
+    private func replaceVoiceActivator(with button: UIButton){
+        voiceActivator?.enabled = true
+        voiceActivator = button
+        button.enabled = false
     }
     
     private func stopPlayingVoice(){
         refreshPlayerState()
         try! audioSession.setActive(false)
         stopButton.hidden = true
+        voiceActivator?.enabled = true
     }
     
     private func refreshPlayerState(){
@@ -140,8 +156,10 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         audioPlayer = player
         
         refreshPlayerState()
-        stopButton.hidden = false
         
+        if (UIScreen.mainScreen().bounds.size.height > 480){
+            stopButton.hidden = false
+        }
         
         audioPlayer!.scheduleBuffer(audioBuffer){
             [unowned self] in
@@ -151,6 +169,7 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                 if (self.isPlaying == false){
                     self.stopButton.hidden = true
+                    self.voiceActivator?.enabled = true
                 }
             }
         }
