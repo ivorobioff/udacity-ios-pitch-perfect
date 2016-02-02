@@ -82,6 +82,11 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         playVoiceWithReverb()
     }
     
+    @IBAction func dirtyVoice(sender: UIButton) {
+        replaceVoiceActivator(with: sender)
+        playVoiceWithDistortion()
+    }
+    
     private func replaceVoiceActivator(with button: UIButton){
         voiceActivator?.enabled = true
         voiceActivator = button
@@ -102,18 +107,29 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         audioEngine?.reset()
     }
     
+    private func playVoiceWithDistortion(){
+        let distortionNode = AVAudioUnitDistortion()
+        distortionNode.loadFactoryPreset(.SpeechCosmicInterference)
+        distortionNode.wetDryMix = 80.0
+        playVoice(withEffect: distortionNode)
+    }
+    
     private func playVoiceWithReverb(){
+        let reverbNode = AVAudioUnitReverb()
+        reverbNode.loadFactoryPreset(.Cathedral)
+        reverbNode.wetDryMix = 50.0
+        playVoice(withEffect: reverbNode)
+    }
+    
+    private func playVoice(withEffect effect: AVAudioUnitEffect){
         let engine = AVAudioEngine()
         let player = AVAudioPlayerNode()
-        let reverbNode = AVAudioUnitReverb()
-        reverbNode.loadFactoryPreset(.LargeHall)
-        reverbNode.wetDryMix = 50.0
         
         engine.attachNode(player)
-        engine.attachNode(reverbNode)
+        engine.attachNode(effect)
         
-        engine.connect(player, to: reverbNode, format: audioBuffer.format)
-        engine.connect(reverbNode, to: engine.mainMixerNode, format: audioBuffer.format)
+        engine.connect(player, to: effect, format: audioBuffer.format)
+        engine.connect(effect, to: engine.mainMixerNode, format: audioBuffer.format)
         
         playVoice(withEngine: engine, withPlayer: player)
 

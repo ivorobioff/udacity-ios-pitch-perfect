@@ -133,12 +133,21 @@
                                     <action selector="reverbVoice:" destination="af8-5R-Ahn" eventType="touchUpInside" id="l90-zB-kNS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eS4-8J-qTb" userLabel="Dirty Button">
+                                <rect key="frame" x="461" y="354" width="99" height="99"/>
+                                <state key="normal" image="Dirty"/>
+                                <connections>
+                                    <action selector="dirtyVoice:" destination="af8-5R-Ahn" eventType="touchUpInside" id="nt7-dG-M0r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RgM-Be-QH7" firstAttribute="centerX" secondItem="25l-G4-ITb" secondAttribute="centerX" id="1cQ-0S-o0w"/>
+                            <constraint firstItem="eS4-8J-qTb" firstAttribute="baseline" secondItem="Vms-hb-jCA" secondAttribute="baseline" id="1gX-AE-0Of"/>
                             <constraint firstItem="Vms-hb-jCA" firstAttribute="centerX" secondItem="udt-g7-inx" secondAttribute="centerX" id="1nd-rl-hJP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="s0v-Zq-cOB" secondAttribute="trailing" constant="20" id="2jh-xN-EJW"/>
+                            <constraint firstItem="eS4-8J-qTb" firstAttribute="centerX" secondItem="s0v-Zq-cOB" secondAttribute="centerX" id="A9J-l1-YgU"/>
                             <constraint firstItem="Nmy-st-601" firstAttribute="top" secondItem="RgM-Be-QH7" secondAttribute="bottom" constant="80" id="NgC-7H-T18"/>
                             <constraint firstItem="Vms-hb-jCA" firstAttribute="top" secondItem="3Yy-SN-h0t" secondAttribute="bottom" constant="30" id="Rph-R5-uYt"/>
                             <constraint firstItem="d65-18-gkz" firstAttribute="centerX" secondItem="s0v-Zq-cOB" secondAttribute="centerX" id="Rx6-KC-1zk"/>
@@ -160,6 +169,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Dirty" width="99" height="99"/>
         <image name="Fast" width="100" height="100"/>
         <image name="Funny" width="100" height="100"/>
         <image name="Microphone" width="100" height="100"/>
