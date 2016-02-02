@@ -111,28 +111,14 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         let distortionNode = AVAudioUnitDistortion()
         distortionNode.loadFactoryPreset(.SpeechCosmicInterference)
         distortionNode.wetDryMix = 80.0
-        playVoice(withEffect: distortionNode)
+        playVoice(withNode: distortionNode)
     }
     
     private func playVoiceWithReverb(){
         let reverbNode = AVAudioUnitReverb()
         reverbNode.loadFactoryPreset(.Cathedral)
         reverbNode.wetDryMix = 50.0
-        playVoice(withEffect: reverbNode)
-    }
-    
-    private func playVoice(withEffect effect: AVAudioUnitEffect){
-        let engine = AVAudioEngine()
-        let player = AVAudioPlayerNode()
-        
-        engine.attachNode(player)
-        engine.attachNode(effect)
-        
-        engine.connect(player, to: effect, format: audioBuffer.format)
-        engine.connect(effect, to: engine.mainMixerNode, format: audioBuffer.format)
-        
-        playVoice(withEngine: engine, withPlayer: player)
-
+        playVoice(withNode: reverbNode)
     }
     
     private func playVoice(withPitch pitch: Float){
@@ -140,7 +126,7 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         let pitchNode = AVAudioUnitTimePitch()
         pitchNode.pitch = pitch
         
-        playVoice(withPitchNode: pitchNode)
+        playVoice(withNode: pitchNode)
     }
     
     private func playVoice(withRate rate: Float){
@@ -148,28 +134,24 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         let pitchNode = AVAudioUnitTimePitch()
         pitchNode.rate = rate
         
-        playVoice(withPitchNode: pitchNode)
+        playVoice(withNode: pitchNode)
     }
     
-    private func playVoice(withPitchNode pitchNode: AVAudioUnitTimePitch){
+    private func playVoice(withNode node: AVAudioNode){
+        
         let engine = AVAudioEngine()
         let player = AVAudioPlayerNode()
         
-        engine.attachNode(player)
-        engine.attachNode(pitchNode)
-        
-        engine.connect(player, to: pitchNode, format: audioBuffer.format)
-        engine.connect(pitchNode, to: engine.mainMixerNode, format: audioBuffer.format)
-        
-        playVoice(withEngine: engine, withPlayer: player)
-    }
-    
-    private func playVoice(withEngine engine: AVAudioEngine, withPlayer player: AVAudioPlayerNode){
-
-        try! audioSession.setActive(true)
-        
         audioEngine = engine
         audioPlayer = player
+        
+        try! audioSession.setActive(true)
+        
+        engine.attachNode(player)
+        engine.attachNode(node)
+        
+        engine.connect(player, to: node, format: audioBuffer.format)
+        engine.connect(node, to: engine.mainMixerNode, format: audioBuffer.format)
         
         refreshPlayerState()
         
@@ -195,4 +177,4 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         audioPlayer!.play()
         isPlaying = true
     }
-}
+ }
