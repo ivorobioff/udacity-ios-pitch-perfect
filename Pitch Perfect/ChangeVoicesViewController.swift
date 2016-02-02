@@ -13,6 +13,8 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
 
     var recordedAudio: RecordedAudio!
     
+    var isPlaying = false
+    
     private lazy var audioEngine: AVAudioEngine = {
         
         [unowned self] in
@@ -79,7 +81,7 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func scaryVoice(sender: UIButton){
-    
+        playVoice(withPitch: -1000)
     }
     
     private func stopPlayingVoice(){
@@ -106,8 +108,12 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         pitchNode.rate = rate
 
         audioPlayer.scheduleBuffer(audioBuffer){
+            [unowned self] in
+            
+            self.isPlaying = false
+            
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                if (self.audioPlayer.playing == false){
+                if (self.isPlaying == false){
                     self.stopButton.hidden = true
                 }
             }
@@ -116,5 +122,6 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         try! audioEngine.start()
         
         audioPlayer.play()
+        isPlaying = true
     }
 }

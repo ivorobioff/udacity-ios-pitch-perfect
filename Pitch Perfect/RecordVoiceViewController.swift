@@ -15,7 +15,9 @@ class RecordVoiceViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBOutlet weak var recordingIndicator: UILabel!
     
+    @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopRecordingButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -45,6 +47,14 @@ class RecordVoiceViewController: UIViewController, AVAudioRecorderDelegate {
         recorder.prepareToRecord()
         recorder.record()
         recorder.delegate = self
+    }
+    
+    private func disableRecordButton(){
+        recordButton.enabled = false
+        
+        UIView.animateWithDuration(0.5){
+            self.recordButton.alpha = 0.3
+        }
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
