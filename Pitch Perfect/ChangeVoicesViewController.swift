@@ -94,17 +94,14 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     private func stopPlayingVoice(){
-        refreshPlayerState()
-        try! audioSession.setActive(false)
-        stopButton.hidden = true
-        voiceActivator?.enabled = true
-    }
-    
-    private func refreshPlayerState(){
         audioPlayer?.stop()
         audioPlayer?.reset()
         audioEngine?.stop()
         audioEngine?.reset()
+        
+        try! audioSession.setActive(false)
+        stopButton.hidden = true
+        voiceActivator?.enabled = true
     }
     
     private func playVoiceWithDistortion(){
@@ -139,21 +136,19 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     
     private func playVoice(withNode node: AVAudioNode){
         
+        try! audioSession.setActive(true)
+        
         let engine = AVAudioEngine()
         let player = AVAudioPlayerNode()
         
         audioEngine = engine
         audioPlayer = player
         
-        try! audioSession.setActive(true)
-        
         engine.attachNode(player)
         engine.attachNode(node)
         
         engine.connect(player, to: node, format: audioBuffer.format)
         engine.connect(node, to: engine.mainMixerNode, format: audioBuffer.format)
-        
-        refreshPlayerState()
         
         if (UIScreen.mainScreen().bounds.size.height > 480){
             stopButton.hidden = false
