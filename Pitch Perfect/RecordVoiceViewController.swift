@@ -31,6 +31,7 @@ class RecordVoiceViewController: UIViewController, AVAudioRecorderDelegate {
         recordingIndicator.text = "Recording"
         recordingIndicator.hidden = false
         stopRecordingButton.hidden = false
+        recordButton.enabled = false
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         let fileName = "record.wav"
@@ -49,14 +50,6 @@ class RecordVoiceViewController: UIViewController, AVAudioRecorderDelegate {
         recorder.delegate = self
     }
     
-    private func disableRecordButton(){
-        recordButton.enabled = false
-        
-        UIView.animateWithDuration(0.5){
-            self.recordButton.alpha = 0.3
-        }
-    }
-    
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
         
         guard flag else {
@@ -68,6 +61,7 @@ class RecordVoiceViewController: UIViewController, AVAudioRecorderDelegate {
         
         performSegueWithIdentifier("toPlayVoice", sender: model)
         recordingIndicator.hidden = true
+        recordButton.enabled = true
     }
     
     @IBAction func stopRecording(sender: AnyObject) {

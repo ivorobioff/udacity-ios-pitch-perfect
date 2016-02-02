@@ -119,19 +119,28 @@
                                     <action selector="funnyVoice:" destination="af8-5R-Ahn" eventType="touchUpInside" id="CLq-5r-hzi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d65-18-gkz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d65-18-gkz" userLabel="Scary Button">
                                 <rect key="frame" x="460" y="224" width="100" height="100"/>
                                 <state key="normal" image="Scary"/>
                                 <connections>
                                     <action selector="scaryVoice:" destination="af8-5R-Ahn" eventType="touchUpInside" id="aBa-BH-lTq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vms-hb-jCA" userLabel="Reverb Button">
+                                <rect key="frame" x="41" y="354" width="99" height="99"/>
+                                <state key="normal" image="Reverb"/>
+                                <connections>
+                                    <action selector="reverbVoice:" destination="af8-5R-Ahn" eventType="touchUpInside" id="l90-zB-kNS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RgM-Be-QH7" firstAttribute="centerX" secondItem="25l-G4-ITb" secondAttribute="centerX" id="1cQ-0S-o0w"/>
+                            <constraint firstItem="Vms-hb-jCA" firstAttribute="centerX" secondItem="udt-g7-inx" secondAttribute="centerX" id="1nd-rl-hJP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="s0v-Zq-cOB" secondAttribute="trailing" constant="20" id="2jh-xN-EJW"/>
                             <constraint firstItem="Nmy-st-601" firstAttribute="top" secondItem="RgM-Be-QH7" secondAttribute="bottom" constant="80" id="NgC-7H-T18"/>
+                            <constraint firstItem="Vms-hb-jCA" firstAttribute="top" secondItem="3Yy-SN-h0t" secondAttribute="bottom" constant="30" id="Rph-R5-uYt"/>
                             <constraint firstItem="d65-18-gkz" firstAttribute="centerX" secondItem="s0v-Zq-cOB" secondAttribute="centerX" id="Rx6-KC-1zk"/>
                             <constraint firstItem="udt-g7-inx" firstAttribute="leading" secondItem="25l-G4-ITb" secondAttribute="leadingMargin" constant="20" id="WCt-QS-XJA"/>
                             <constraint firstItem="s0v-Zq-cOB" firstAttribute="baseline" secondItem="udt-g7-inx" secondAttribute="baseline" id="WZu-FI-usl"/>
@@ -154,6 +163,7 @@
         <image name="Fast" width="100" height="100"/>
         <image name="Funny" width="100" height="100"/>
         <image name="Microphone" width="100" height="100"/>
+        <image name="Reverb" width="99" height="99"/>
         <image name="Scary" width="100" height="100"/>
         <image name="Slow" width="100" height="100"/>
         <image name="Stop" width="50" height="50"/>

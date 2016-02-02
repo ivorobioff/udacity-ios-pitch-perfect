@@ -15,20 +15,8 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     
     var isPlaying = false
     
-    private lazy var audioEngine: AVAudioEngine = {
-        
-        [unowned self] in
-        
-        var audioEngine = AVAudioEngine()
-            
-        audioEngine.attachNode(self.audioPlayer)
-        audioEngine.attachNode(self.pitchNode)
-        audioEngine.connect(self.audioPlayer, to: self.pitchNode, format: self.audioBuffer.format)
-        audioEngine.connect(self.pitchNode, to: audioEngine.mainMixerNode, format: self.audioBuffer.format)
-        
-        return audioEngine
-    }()
-    
+    private var audioEngine: AVAudioEngine?
+    private var audioPlayer: AVAudioPlayerNode?
     
     private lazy var audioSession: AVAudioSession = {
         let session = AVAudioSession.sharedInstance()
@@ -48,10 +36,6 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         
         return buffer
     }()
-    
-    private var audioPlayer: AVAudioPlayerNode = AVAudioPlayerNode()
-    
-    private var pitchNode = AVAudioUnitTimePitch()
     
     @IBOutlet weak var stopButton: UIButton!
     
@@ -84,6 +68,11 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
         playVoice(withPitch: -1000)
     }
     
+    
+    @IBAction func reverbVoice(sender: UIButton) {
+        playVoiceWithReverb()
+    }
+    
     private func stopPlayingVoice(){
         refreshPlayerState()
         try! audioSession.setActive(false)
@@ -91,23 +80,70 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     private func refreshPlayerState(){
-        audioPlayer.stop()
-        audioPlayer.reset()
-        audioEngine.stop()
-        audioEngine.reset()
+        audioPlayer?.stop()
+        audioPlayer?.reset()
+        audioEngine?.stop()
+        audioEngine?.reset()
     }
     
-    private func playVoice(withPitch pitch: Float = 1.0, withRate rate: Float = 1.0){
+    private func playVoiceWithReverb(){
+        let engine = AVAudioEngine()
+        let player = AVAudioPlayerNode()
+        let reverbNode = AVAudioUnitReverb()
+        reverbNode.loadFactoryPreset(.LargeHall)
+        reverbNode.wetDryMix = 50.0
+        
+        engine.attachNode(player)
+        engine.attachNode(reverbNode)
+        
+        engine.connect(player, to: reverbNode, format: audioBuffer.format)
+        engine.connect(reverbNode, to: engine.mainMixerNode, format: audioBuffer.format)
+        
+        playVoice(withEngine: engine, withPlayer: player)
+
+    }
+    
+    private func playVoice(withPitch pitch: Float){
+        
+        let pitchNode = AVAudioUnitTimePitch()
+        pitchNode.pitch = pitch
+        
+        playVoice(withPitchNode: pitchNode)
+    }
+    
+    private func playVoice(withRate rate: Float){
+        
+        let pitchNode = AVAudioUnitTimePitch()
+        pitchNode.rate = rate
+        
+        playVoice(withPitchNode: pitchNode)
+    }
+    
+    private func playVoice(withPitchNode pitchNode: AVAudioUnitTimePitch){
+        let engine = AVAudioEngine()
+        let player = AVAudioPlayerNode()
+        
+        engine.attachNode(player)
+        engine.attachNode(pitchNode)
+        
+        engine.connect(player, to: pitchNode, format: audioBuffer.format)
+        engine.connect(pitchNode, to: engine.mainMixerNode, format: audioBuffer.format)
+        
+        playVoice(withEngine: engine, withPlayer: player)
+    }
+    
+    private func playVoice(withEngine engine: AVAudioEngine, withPlayer player: AVAudioPlayerNode){
 
         try! audioSession.setActive(true)
+        
+        audioEngine = engine
+        audioPlayer = player
         
         refreshPlayerState()
         stopButton.hidden = false
         
-        pitchNode.pitch = pitch
-        pitchNode.rate = rate
-
-        audioPlayer.scheduleBuffer(audioBuffer){
+        
+        audioPlayer!.scheduleBuffer(audioBuffer){
             [unowned self] in
             
             self.isPlaying = false
@@ -119,9 +155,9 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
             }
         }
         
-        try! audioEngine.start()
+        try! audioEngine!.start()
         
-        audioPlayer.play()
+        audioPlayer!.play()
         isPlaying = true
     }
 }
