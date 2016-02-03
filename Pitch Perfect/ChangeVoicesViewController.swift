@@ -39,11 +39,7 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     }()
     
     @IBOutlet weak var stopButton: UIButton!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+  
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -58,36 +54,36 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func fastVoice(sender: UIButton) {
-        replaceVoiceActivator(with: sender)
+        replaceVoiceActivator(sender)
         playVoice(withRate: 2.0)
     }
     
     @IBAction func funnyVoice(sender: UIButton) {
-        replaceVoiceActivator(with: sender)
+        replaceVoiceActivator(sender)
         playVoice(withPitch: 1000)
     }
     
     @IBAction func slowVoice(sender: UIButton) {
-        replaceVoiceActivator(with: sender)
+        replaceVoiceActivator(sender)
         playVoice(withRate: 0.5)
     }
     
     @IBAction func scaryVoice(sender: UIButton){
-        replaceVoiceActivator(with: sender)
+        replaceVoiceActivator(sender)
         playVoice(withPitch: -1000)
     }
     
     @IBAction func reverbVoice(sender: UIButton) {
-        replaceVoiceActivator(with: sender)
+        replaceVoiceActivator(sender)
         playVoiceWithReverb()
     }
     
     @IBAction func dirtyVoice(sender: UIButton) {
-        replaceVoiceActivator(with: sender)
+        replaceVoiceActivator(sender)
         playVoiceWithDistortion()
     }
     
-    private func replaceVoiceActivator(with button: UIButton){
+    private func replaceVoiceActivator(button: UIButton){
         voiceActivator?.enabled = true
         voiceActivator = button
         button.enabled = false
