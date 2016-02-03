@@ -39,10 +39,6 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     }()
     
     @IBOutlet weak var stopButton: UIButton!
-  
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
