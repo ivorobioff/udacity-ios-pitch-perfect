@@ -94,6 +94,7 @@ class ChangeVoicesViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     private func stopPlayingVoice(){
+       
         audioPlayer?.stop()
         audioPlayer?.reset()
         audioEngine?.stop()
